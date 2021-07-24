@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Axie Finder",
+  "version": "0.2.0",
+  "description": "Axie Infinity marketplace finder extension",
+  "permissions": [
+    "nativeMessaging",
+    "scripting",
+    "activeTab",
+    "storage",
+    "tabs",
+    "notifications",
+    "debugger"
+  ],
+  "host_permissions": [
+    "*://*.marketplace.axieinfinity.com/axie*"
+  ],
+  "icons": {
+    "16": "images/ax_16.png",
+    "48": "images/ax_48.png",
+    "128": "images/ax_128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Click to check the options",
+    "default_icon": {
+      "16": "images/ax_16.png",
+      "32": "images/ax_32.png"
+    }
+  }
+}

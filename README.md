@@ -1,2 +1,2 @@
 # Chrome-AxieFinder
-AxieInfinity parts/stats finder.
+AxieInfinity parts/stats finder Chrome Extension
