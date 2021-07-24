@@ -1,8 +1,9 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    debugger;
-
     var testButton = document.getElementById('testButton');
+    setupTestButtonEvents(testButton);
+}, false);
 
+function setupTestButtonEvents(testButton) {
     testButton.addEventListener("click", async () => {
         let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -13,7 +14,7 @@
             executeAlert(tab.id, validUrlAlert);
         }
     }, false);
-}, false);
+}
 
 function executeAlert(tabId, functionRef) {
     chrome.scripting.executeScript({
