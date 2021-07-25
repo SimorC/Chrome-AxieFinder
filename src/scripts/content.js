@@ -6,6 +6,9 @@ chrome.runtime.onMessage.addListener(
             case 'fish-1':
                 searchFish1Build();
                 break;
+            case 'plant-1':
+                searchPlant1Build();
+                break;
             default:
                 sendResponse({ status: 'Build not implemented/found ):' });
         }
@@ -27,6 +30,21 @@ function searchFish1Build() {
 
         searchInput.blur();
         changeStats('Speed', 55, 61);
+    }, 500);
+}
+
+function searchPlant1Build() {
+    document.getElementsByClassName('tab')[1].click();
+    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
+
+    setTimeout(() => {
+        searchInput.focus();
+        findByContent('h6.text-gray-1', 'October Treat')[0].click();
+        findByContent('h6.text-gray-1', 'Vegetal Bite')[1].click();
+
+        searchInput.blur();
+        changeStats('Speed', 27, 31);
+        changeStats('Health', 60, 61);
     }, 500);
 }
 
