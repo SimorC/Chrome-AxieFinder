@@ -11,6 +11,10 @@ chrome.runtime.onMessage.addListener(
                 break;
             case 'beast-1':
                 searchBeast1Build();
+                break;
+            case 'beast-2':
+                searchBeast2Build();
+                break;
             default:
                 sendResponse({ status: 'Build not implemented/found ):' });
         }
@@ -93,6 +97,17 @@ function searchBeast1Build() {
         searchInput.focus();
 
         searchCommonBeastBuild(searchInput, { name: 'Night Steal', index: 0 });
+    }, 500);
+}
+
+function searchBeast2Build() {
+    document.getElementsByClassName('tab')[1].click();
+    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
+
+    setTimeout(() => {
+        searchInput.focus();
+
+        searchCommonBeastBuild(searchInput, { name: 'Luna Absorb', index: 0 });
     }, 500);
 }
 
