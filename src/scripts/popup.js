@@ -14,16 +14,23 @@ function onBuildClick(btn) {
             executeFunction(tab.id, invalidUrlAlert);
         }
         else {
-            executeFunction(tab.id, btn.id);
+            sendClickMessage(tab.id, btn.id);
             window.close();
         }
     }, false);
 }
 
 // Checks for invalid websites
-function executeFunction(tabId, targetId) {
+function sendClickMessage(tabId, targetId) {
     chrome.tabs.sendMessage(tabId, { targetId: targetId }, (response) => {
         console.log(response.status);
+    });
+}
+
+function executeFunction(tabId, functionRef) {
+    chrome.scripting.executeScript({
+        target: { tabId: tabId, allFrames: true },
+        function: functionRef
     });
 }
 
