@@ -9,6 +9,8 @@ chrome.runtime.onMessage.addListener(
             case 'plant-1':
                 searchPlant1Build();
                 break;
+            case 'beast-1':
+                searchBeast1Build();
             default:
                 sendResponse({ status: 'Build not implemented/found ):' });
         }
@@ -17,37 +19,7 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-function searchFish1Build() {
-    document.getElementsByClassName('tab')[1].click();
-    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
-
-    setTimeout(() => {
-        searchInput.focus();
-        findByContent('h6.text-gray-1', 'Tail Slap')[0].click();
-        findByContent('h6.text-gray-1', 'Swift Escape')[0].click();
-        findByContent('h6.text-gray-1', 'Star Shuriken')[1].click();
-        findByContent('h6.text-gray-1', 'Fish Hook')[0].click();
-
-        searchInput.blur();
-        changeStats('Speed', 55, 61);
-    }, 500);
-}
-
-function searchPlant1Build() {
-    document.getElementsByClassName('tab')[1].click();
-    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
-
-    setTimeout(() => {
-        searchInput.focus();
-        findByContent('h6.text-gray-1', 'October Treat')[0].click();
-        findByContent('h6.text-gray-1', 'Vegetal Bite')[1].click();
-
-        searchInput.blur();
-        changeStats('Speed', 27, 31);
-        changeStats('Health', 60, 61);
-    }, 500);
-}
-
+/// Page manipulation
 function changeStats(stat, floor, ceiling) {
     document.getElementsByClassName('tab')[2].click();
 
@@ -66,4 +38,71 @@ function findByContent(selector, text) {
     return [].filter.call(elements, (element) => {
         return RegExp(text).test(element.textContent);
     });
+}
+
+/// Builds
+function searchParts(parts) {
+    parts.forEach(part => {
+        findByContent('h6.text-gray-1', part.name)[part.index].click();
+    });
+}
+
+// Fish
+function searchFish1Build() {
+    document.getElementsByClassName('tab')[1].click();
+    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
+
+    setTimeout(() => {
+        searchInput.focus();
+        searchParts([
+            { name: 'Tail Slap', index: 0 },
+            { name: 'Swift Escape', index: 0 },
+            { name: 'Star Shuriken', index: 1 },
+            { name: 'Fish Hook', index: 0 }
+        ]);
+
+        searchInput.blur();
+        changeStats('Speed', 55, 61);
+    }, 500);
+}
+
+// Plant
+function searchPlant1Build() {
+    document.getElementsByClassName('tab')[1].click();
+    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
+
+    setTimeout(() => {
+        searchInput.focus();
+        searchParts([
+            { name: 'October Treat', index: 0 },
+            { name: 'Vegetal Bite', index: 1 }
+        ]);
+
+        searchInput.blur();
+        changeStats('Speed', 27, 31);
+        changeStats('Health', 60, 61);
+    }, 500);
+}
+
+// Beast
+function searchBeast1Build() {
+    document.getElementsByClassName('tab')[1].click();
+    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
+
+    setTimeout(() => {
+        searchInput.focus();
+
+        searchCommonBeastBuild(searchInput, { name: 'Night Steal', index: 0 });
+    }, 500);
+}
+
+function searchCommonBeastBuild(searchInput, tail) {
+    searchParts([
+        { name: 'Single Combat', index: 1 },
+        { name: 'Sinister Strike', index: 0 },
+        tail
+    ]);
+
+    searchInput.blur();
+    changeStats('Morale', 60, 61);
 }
