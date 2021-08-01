@@ -9,6 +9,9 @@ chrome.runtime.onMessage.addListener(
             case 'plant-1':
                 searchPlant1Build();
                 break;
+            case 'bird-1':
+                searchBird1Build();
+                break;
             case 'beast-1':
                 searchBeast1Build();
                 break;
@@ -85,6 +88,25 @@ function searchPlant1Build() {
         searchInput.blur();
         changeStats('Speed', 27, 31);
         changeStats('Health', 60, 61);
+    }, 500);
+}
+
+// Bird
+function searchBird1Build() {
+    document.getElementsByClassName('tab')[1].click();
+    let searchInput = document.querySelector('[placeholder="Search parts and abilities"]');
+
+    setTimeout(() => {
+        searchInput.focus();
+        searchParts([
+            { name: 'Early Bird', index: 1 },
+            { name: 'Peace Treaty', index: 0 },
+            { name: 'Headshot', index: 0 },
+            { name: 'Ill-omened', index: 0 }
+        ]);
+
+        searchInput.blur();
+        changeStats('Speed', 55, 61);
     }, 500);
 }
 
